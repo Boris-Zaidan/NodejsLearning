@@ -62,7 +62,17 @@ app.post("/client", (req, res) => {
 app.delete("/client/:id", (req, res) => {
   let index = burcarIndexClient(req.params.id);
   client.splice(index, 1);
-  res.status(200).send(`Client com id ${req.params.id} excluido com sucesso`);
+  res.status(200).send(`Client com id ${req.params.id} excluido com sucesso`); //deletando 1 client com sucesso por id/index
+});
+
+app.put("/client/:id", (req, res) => {
+  let index = burcarIndexClient(req.params.id);
+  client[index].name = req.body.name;
+  client[index].age = req.body.age;
+  client[index].city = req.body.city;
+  res
+    .status(200)
+    .send(`Client com id ${req.params.id} foi atualizado com sucesso`);
 });
 
 export default app;
