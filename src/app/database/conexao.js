@@ -15,9 +15,3 @@ const conexao = mysql.createConnection({
 conexao.connect();
 
 export default conexao;
-
-// Atualizar
-// UPDATE `dbclient`.`clients` SET `age` = '32' WHERE (`id` = '4');
-
-// Delete nunca fazer sem o Where
-// DELETE FROM `dbclient`.`clients` WHERE (`id` = '3');
