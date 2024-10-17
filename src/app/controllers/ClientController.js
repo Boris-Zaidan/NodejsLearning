@@ -1,70 +1,39 @@
-import conexao from "../database/conexao.js";
+import ClientRepository from "../repositories/ClientRepository.js";
 
 class ClientController {
   // Método para listar todos os clientes
-  index(req, res) {
-    const sql = "SELECT * FROM clients;";
-    conexao.query(sql, (error, result) => {
-      if (error) {
-        res.status(404).json({ Error: error });
-      } else {
-        res.status(200).json(result);
-      }
-    });
+  async index(req, res) {
+    const row = await ClientRepository.findAll();
+    res.json(row);
   }
 
   // Método para mostrar um cliente específico
-  show(req, res) {
+  async show(req, res) {
     const id = req.params.id;
-    const sql = "SELECT * FROM clients WHERE id=?;";
-    conexao.query(sql, id, (error, result) => {
-      const linha = result[0];
-      if (error) {
-        res.status(404).json({ Error: error });
-      } else {
-        res.status(200).json(linha);
-      }
-    });
+    const row = await ClientRepository.findById(id);
+    res.json(row);
   }
 
   // Método para criar um novo cliente
-  store(req, res) {
+  async store(req, res) {
     const client = req.body;
-    const sql = "INSERT INTO clients SET ?;";
-    conexao.query(sql, client, (error, result) => {
-      if (error) {
-        res.status(404).json({ Error: error });
-      } else {
-        res.status(201).json({ "Cadastrado com sucesso!": result });
-      }
-    });
+    const row = await ClientRepository.create(client);
+    res.json(row);
   }
 
   // Método para atualizar um cliente
-  update(req, res) {
+  async update(req, res) {
     const id = req.params.id;
     const client = req.body;
-    const sql = "UPDATE clients SET ? WHERE id=?;";
-    conexao.query(sql, [client, id], (error, result) => {
-      if (error) {
-        res.status(404).json({ Error: error });
-      } else {
-        res.status(200).json({ "Atualizado com sucesso!": result });
-      }
-    });
+    const row = await ClientRepository.update(client, id);
+    res.json(row);
   }
 
   // Método para deletar um cliente
-  delete(req, res) {
+  async delete(req, res) {
     const id = req.params.id;
-    const sql = "DELETE FROM clients WHERE id=?;";
-    conexao.query(sql, id, (error, result) => {
-      if (error) {
-        res.status(404).json({ Error: error });
-      } else {
-        res.status(200).json({ "Client Deletado com sucesso!": result });
-      }
-    });
+    const row = await ClientRepository.delete(id);
+    res.json(row);
   }
 }
 
