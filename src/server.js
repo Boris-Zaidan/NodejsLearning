@@ -1,7 +1,7 @@
 import app from "./app.js";
 
-const port = 3000;
+const Port = process.env.Port || 3000;
 
-app.listen(port, () => {
-  console.log(`Servidor rodando na porta ${port}...!`);
+app.listen(Port, () => {
+  console.log(`Servidor rodando na porta ${Port}...!`);
 });

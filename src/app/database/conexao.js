@@ -21,7 +21,6 @@ conexao.connect();
  * @param {string} msgReject mensagem a ser exibida
  * @returns objeto da promise
  */
-
 export const consulta = (sql, valores = "", msgReject) => {
   return new Promise((resolve, reject) => {
     conexao.query(sql, valores, (error, result) => {
